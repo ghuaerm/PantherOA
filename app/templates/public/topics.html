@@ -1,0 +1,49 @@
+{% extends 'public/layout.html' %}
+{% from 'macros.html' import module_link with context %}
+
+{% block content %}
+    <div class="container-fluid">
+        <div class="row" style="margin-top: 50px">
+            <div class="col-md-10 offset-md-1">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                    <li class="breadcrumb-item"><a href="#">Library</a></li>
+                    <li class="breadcrumb-item active">Data</li>
+                </ol>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-2 offset-md-1">
+                <ul class="nav nav-pills flex-column">
+                    {% for module in module_list %}
+                        {{ module_link('#',module.name) }}
+                    {% endfor %}
+                </ul>
+            </div>
+            <div class="col-md-8">
+                <table class="table table-hover table-striped table-sm">
+                    <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">标题</th>
+                        <th scope="col">作者</th>
+                        <th scope="col" style="text-align: right">发布日期</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for archive in archive_list %}
+                        <tr>
+                            <th scope="row">{{ archive.id }}</th>
+                            <td>
+                                <a href="{{ url_for('public.archive',yyyy=archive.created_at.year,mm=archive.created_at.month,dd=archive.created_at.day,archive_id=archive.id) }}">{{ archive.tittle }}</a>
+                            </td>
+                            <td></td>
+                            <td style="text-align: right">{{ archive.created_at.strftime( '%Y-%m-%d %I:%M:%S %p' ) }}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,43 @@
+{% extends 'public/layout.html' %}
+{% from 'macros.html' import module_link with context %}
+{% block content %}
+    <div class="container-fluid">
+        <div class="row" style="margin-top: 50px">
+            <div class="col-md-10 offset-md-1">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                    <li class="breadcrumb-item"><a href="#">Library</a></li>
+                    <li class="breadcrumb-item active">Data</li>
+                </ol>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-2 offset-md-1">
+                <ul class="nav nav-pills flex-column">
+                    {% for module in module_list %}
+                        {{ module_link('#',module.name) }}
+                    {% endfor %}
+                </ul>
+            </div>
+            <div class="col-md-8">
+                <div class="card mb-3">
+                    <h3 class="card-header">{{ archive_list[0].tittle }}</h3>
+                    <div class="card-body">
+                        <h6 class="card-subtitle text-muted">作者:{{ archive_list[0].tittle }}</h6>
+                    </div>
+                    <hr>
+                    <div class="card-body">
+                        <p class="card-text">{{ archive_list[0].tittle|safe }}</p>
+                    </div>
+                    <div class="card-body">
+                        <a href="#" class="card-link">Card link</a>
+                        <a href="#" class="card-link">Another link</a>
+                    </div>
+                    <div class="card-footer text-muted">
+                        {{ archive_list[0].created_at.strftime( '%Y-%m-%d %I:%M:%S %p' ) }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
